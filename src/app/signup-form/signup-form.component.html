@@ -1,0 +1,38 @@
+<form [formGroup]="form">
+  <div>
+    <label for="username">Username</label>
+    <input
+      id="username"
+      type="text"
+      formControlName="userName"
+      class="form-control">
+    <div class="alert alert-danger"*ngIf="userName.touched && !userName.valid">
+      <div *ngIf="userName.errors.required">user name can not be blank</div>
+      <div *ngIf="userName.errors.minlength">user name must be {{userName.errors.minlength.requiredLength}} char long</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input
+      class="form-control"
+      formControlName="password"
+      id="password"
+      type="password">
+    <div class="alert alert-danger" *ngIf="password().touched && !password().valid">
+      <div *ngIf="password().errors.required">password field can not be blank</div>
+      <div *ngIf="password().errors.pattern">password pattern does not match</div>
+    </div>
+  </div>
+  <button class="btn btn-primary" [disabled]="form.invalid">Login</button>
+</form>
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,39 @@
+<div class="container">
+  <p>Contact Form.</p>
+</div>
+<form #f="ngForm" ngForm (ngSubmit)="submit(f)">
+  <div class="form-group">
+    <label for="title">Title</label>
+    <input  required minlength="4" maxlength="10" ngModel name="title" id="title" class="form-control" #title="ngModel">
+    <div class="alert alert-danger" *ngIf="title.touched && !title.valid">
+      <div *ngIf="title.errors.required">title is required</div>
+      <div *ngIf="title.errors.minlength">minimum length is  <div *ngIf="title.errors.minlength">minimum length is {{title.errors.minlength.requiredLength}}</div></div>
+    </div>
+  </div>
+  <div>
+    <label for="comment">Share</label>
+    <textarea ngModel name="comments" id="comment" class="form-control" cols="30" rows="10" #comments="ngModel"></textarea>
+  </div>
+  <div class="checkbox">
+    <label>
+      <input type="checkbox" ngModel name="isSubscribed">Subscribed to mailing list
+    </label>
+  </div>
+  <div class="form-control">
+    <label for="contactMethod">Contact Method</label>
+    <select  id="contactMethod" ngModel name="contactMethod" #contactMethod="ngModel" class="select">
+      <option *ngFor="let method of contactMethods" [ngValue]="method">{{method.methodName}}</option>
+    </select>
+  </div>
+  <div class="custom-radio" *ngFor="let method of contactMethods">
+    <input type="radio" ngModel name="contactMethod2" [value]="method.id">
+    {{method.methodName}}
+  </div>
+  <div class="container">
+    {{f.value | json}}
+  </div>
+
+  <button class="btn btn-primary" [disabled]="!f.valid" >Submit</button>
+
+<button class = "btn btn-secondary">  Cancel</button>
+</form>
